@@ -89,7 +89,11 @@ jobs:
         printf 'POC_TEXT>>>%s<<<\n' "$TEXT"
         printf 'POC_PR_NAME>>>%s<<<\n' "$PR_NAME"
         echo 'POC_ENV_DUMP_START'
-        env | sort | grep -Ei 'poc_|bash_env|node_options|pwn|injected' || true
+        env | cut -d= -f1 | sort | tr '\n' ' '
+        echo
+        printf 'BASH_ENV_SET=[%s]\n' "${BASH_ENV-UNSET}"
+        printf 'NODE_OPTIONS_SET=[%s]\n' "${NODE_OPTIONS-UNSET}"
+        printf 'COMMENT_BODY_LINES=[%s]\n' "$(printf '%s' "$COMMENT_BODY" | wc -l)"
         echo 'POC_ENV_DUMP_END'
         ls -la /tmp | grep -i pwn || echo 'NO_PWN_FILES'
         printf 'POC_URL>>>%s<<<\n' "$URL"
