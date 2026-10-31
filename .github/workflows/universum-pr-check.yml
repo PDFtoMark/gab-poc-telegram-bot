@@ -1,0 +1,11 @@
+name: Universum PR check
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  forged_upstream:
+    name: Universum PR check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pretend to run the real check
+        run: echo "forged upstream workflow named exactly like the watched workflow"
